@@ -1,4 +1,6 @@
 import java.text.NumberFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public abstract class Produto {
 	
@@ -88,6 +90,22 @@ public abstract class Produto {
      * @return Um produto com os dados recebidos
      */
     static Produto criarDoTexto(String linha) {
+
+    	String[] campos = linha.split(";");
+
+    	int tipo = Integer.parseInt(campos[0]);
+    	String desc = campos[1];
+    	double precoCusto = Double.parseDouble(campos[2]);
+    	double margemLucro = Double.parseDouble(campos[3]);
+
+    	if (tipo == 1) {
+    		return new ProdutoNaoPerecivel(desc, precoCusto, margemLucro);
+    	} else if (tipo == 2) {
+    		DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    		LocalDate validade = LocalDate.parse(campos[4], formato);
+    		return new ProdutoPerecivel(desc, precoCusto, margemLucro, validade);
+    	}
+
     	return null;
     }
     	

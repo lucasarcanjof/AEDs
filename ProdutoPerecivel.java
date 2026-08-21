@@ -2,6 +2,7 @@
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 public class ProdutoPerecivel extends Produto{
 
@@ -97,6 +98,7 @@ public class ProdutoPerecivel extends Produto{
      */
 	@Override
     public String gerarDadosTexto() {
-		return null;
+		DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		return String.format(Locale.US, "2;%s;%.2f;%.2f;%s", descricao, precoCusto, margemLucro, formato.format(dataDeValidade));
 	}
 }
