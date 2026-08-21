@@ -73,6 +73,10 @@ public abstract class Produto {
      */
     @Override
     public boolean equals(Object obj) {
+            if (obj instanceof Produto) {
+               Produto outro = (Produto) obj;
+               return this.descricao.equalsIgnoreCase(outro.descricao);
+            }
         return false;
     }
     
